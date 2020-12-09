@@ -86,8 +86,61 @@ const data = [
     thirdParagraph: `Hodor hodor - hodor... Hodor hodor hodor hodor. Hodor. Hodor! Hodor hodor, hodor hodor hodor hodor hodor; hodor hodor? Hodor!
           Hodor hodor, HODOR hodor, hodor hodor?! Hodor! Hodor hodor, HODOR hodor, hodor hodor, hodor, hodor hodor. Hodor, hodor.
           Hodor. Hodor, hodor, hodor. Hodor hodor... Hodor hodor hodor?! Hodor, hodor... Hodor hodor HODOR hodor, hodor hodor. Hodor.`
+  },
+  {
+    title: 'Manchester United Football Club',
+    date: 'Dec 8th, 2020',
+    firstParagraph: `Today we had the chance to advance to the champions league knockout stages `,
+
+    secondParagraph: `Today we blew the chance to advance to the champions league knockout stages`,
+
+    thirdParagraph: `Our focus must now switch to the premier league`
   }
+
 ];
+
+function articleMaker (obj){
+    const articleDiv = document.createElement("div");
+    articleDiv.classList.add( "article");
+
+    const h2 = document.createElement("h2");
+    h2.textContent = obj.title;
+    articleDiv.appendChild(h2);
+
+    const date = document.createElement("p");
+    date.classList.add("date");
+    date.textContent = obj.date;
+    articleDiv.appendChild(date);
+
+    const par1 = document.createElement("p");
+    par1.textContent = obj.firstParagraph;
+    articleDiv.appendChild(par1);
+
+    const par2 = document.createElement("p");
+    par2.textContent = obj.secondParagraph;
+    articleDiv.appendChild(par2);
+
+    const par3 = document.createElement("p");
+    par3.textContent = obj.thirdParagraph;
+    articleDiv.appendChild(par3);
+
+    const span = document.createElement("span");
+    span.classList.add("expandButton")
+    span.textContent = "+";
+    span.addEventListener("click", e => {
+        articleDiv.classList.toggle("article-open");
+    })
+    articleDiv.appendChild(span);
+
+    return articleDiv
+
+}
+
+const articles = document.querySelector(".articles");
+
+data.forEach(obj => {
+    articles.appendChild(articleMaker(obj))
+})
 
 /*
   Step 1: Write a component called 'articleMaker' to create an article.
@@ -102,6 +155,7 @@ const data = [
 
     <span class="expandButton">+</span>
   </div>
+
 
   Step 2: Still inside `articleMaker`, add an event listener to the span.expandButton.
   This listener should toggle the class 'article-open' on div.article.
